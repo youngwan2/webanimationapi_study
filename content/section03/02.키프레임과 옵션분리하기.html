@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box"></div>
+
+    <script>
+        const box = document.querySelector('.box')
+
+        const keyframes =  [
+            {transform:"translateX(0px)",offset:0},
+            {transform:"translateX(200px)",offset:0.8},
+            {transform:"translate(100px)",offset:1}
+
+        ]
+
+        const options= {
+            duration:1000, // 지속시간 : ms 단위
+            fill:"forwards", // 애니메이션이 끝난 후 태그 위치
+            easing:"ease"          
+        }
+
+        box.animate(keyframes, options)
+
+
+
+    </script>
+    <pre>
+        <p></p>
+
+    </pre>
+</body>
+</html>
