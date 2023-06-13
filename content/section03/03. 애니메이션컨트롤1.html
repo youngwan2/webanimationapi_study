@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: black;
+        }
+
+        .play_state{
+            height: 30px;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <p class="play_state"><span>상태 : </span><span class="state"></span></p>
+    <button class="play_btn" data-function="play">플레이</button>
+    <button class="pause_btn" data-function="pause">정지</button>
+    <button class="twice_btn" data-function="twice">두배</button>
+
+    <script>
+        const playBtn = document.querySelector('.play_btn')
+        const buttons = document.querySelectorAll('button');
+        const box = document.querySelector('.box')
+        const state = document.querySelector('.state')
+
+
+        const keyframes =[
+            {transform: `translateX(0) rotate(0)`},
+            {transform: `translateX(1000px) rotate(1080deg)`}
+        ]
+
+        const options ={
+            duration: 1000,
+            iterations: Infinity,
+            direction: 'alternate',
+        }
+        const animation = box.animate(keyframes,options)
+        buttons.forEach((button)=>{
+           button.addEventListener('click',(e)=>{
+            const value= e.target.dataset.function
+
+            player(value)
+           })
+        })
+
+        const player =(value)=>{
+            console.log(value)
+
+            switch(value){
+                case 'play':
+                    animation.play()
+                    state.innerHTML= animation.playState
+                    break
+                case 'pause':
+                    animation.pause()
+                    state.innerHTML= animation.playState
+                    break
+                case 'twice':
+                    // playbackRate : 애니메이션 속도 조절
+                    console.log(animation.playbackRate)
+                    if(animation.playbackRate == 100){
+                        animation.playbackRate = 1
+                    } else {
+                        animation.playbackRate = 100
+                    }
+                    state.innerHTML= animation.playState
+            }
+        }
+        
+
+
+
+</script>
+    
+</body>
+</html>
