@@ -42,7 +42,21 @@
             iterations: Infinity,
             direction: 'alternate',
         }
-        // const animation = box.animate(keyframes,options)
+             
+        // 앞서 사용한 animate는 아래 생성자의 간소화 버전이라 할 수 있다.
+        // new 키워드로 Animation 클래스를 메모리에 올리면, 실제 사용가능한 인스턴스가 생성된다.
+     const animation =   new Animation(
+            new KeyframeEffect(
+                box, keyframes, options
+            )
+        )
+
+            animation.play()
+
+
+
+
+               // const animation = box.animate(keyframes,options)
         // buttons.forEach((button)=>{
         //    button.addEventListener('click',(e)=>{
         //     const value= e.target.dataset.function
@@ -74,17 +88,6 @@
         //             state.innerHTML= animation.playState
         //     }
         // }
-        
-        // 앞서 사용한 animate는 아래 생성자의 간소화 버전이라 할 수 있다.
-        // new 키워드로 Animation 클래스를 메모리에 올리면, 실제 사용가능한 인스턴스가 생성된다.
-     const animation =   new Animation(
-            new KeyframeEffect(
-                box, keyframes, options
-            )
-        )
-
-            animation.play()
-
 
 
 
