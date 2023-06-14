@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            transition: 1s;
+        }
+
+        .play_state{
+            height: 30px;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <p class="play_state"><span>상태 : </span><span class="state"></span></p>
+    <button class="play_btn" data-function="play">플레이</button>
+    <button class="pause_btn" data-function="pause">정지</button>
+    <button class="twice_btn" data-function="twice">두배</button>
+
+    <script>
+        const playBtn = document.querySelector('.play_btn')
+        const buttons = document.querySelectorAll('button');
+        const box = document.querySelector('.box')
+        const state = document.querySelector('.state')
+
+
+        const keyframes =[
+            {transform: `translateX(0) rotate(0)`},
+            {transform: `translateX(200px) rotate(1080deg)`}
+        ]
+
+        const options ={
+            duration: 1000,
+            iterations: 1,
+            fill:'forwards',
+            direction: 'alternate',
+        }
+        const animation = box.animate(keyframes,options)
+        buttons.forEach((button)=>{
+           button.addEventListener('click',(e)=>{
+            const value= e.target.dataset.function
+
+            player(value)
+           })
+        })
+
+        const player =(value)=>{
+            console.log(value)
+
+            switch(value){
+                case 'play':
+                    animation.play()
+                    state.innerHTML= animation.playState
+                    break
+                case 'pause':
+                    animation.pause()
+                    state.innerHTML= animation.playState
+                    break
+                case 'twice':
+                    // playbackRate : 애니메이션 속도 조절
+                    console.log(animation.playbackRate)
+                    if(animation.playbackRate == 100){
+                        animation.playbackRate = 1
+                    } else {
+                        animation.playbackRate = 100
+                    }
+                    state.innerHTML= animation.playState
+            }
+        }
+
+        // 우리가 앞서 사용했던 Animation 객체가 인자로 들어온다.
+        /* 애니메이션이 시작될 때 실행되는 프로미스  */
+        animation.ready.then((animations)=>{
+            console.log('시작!')
+            console.log(animations)
+            box.style.background ="gold"
+        })
+
+        /* 애니메이션이 끝날 때 실행되는 프로미스 */
+        animation.finished.then((animations)=>{
+            console.log("끝")
+            console.log(animations)
+            box.style.background="red"
+            box.innerHTML="끝!"
+        })
+        
+
+
+
+</script>
+    
+</body>
+</html>
