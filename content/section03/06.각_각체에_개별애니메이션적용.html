@@ -5,53 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        body{
+            background-color: aquamarine;
+        }
 
         .bar_container{
             display: flex;
-            justify-content: center;
+            justify-content: left;
+            position: relative;
+            left: 50%;
+            /* transform: translate(-50%); */
+         
+            
         
         }
 
         .bar{
-            width: 20px;
-            margin: 20px;
-            height: 300px;
+            min-width: 30px;
+            border-top-right-radius: 50%;
+            height: 800px;
         }
 
-        .bar:nth-of-type(n){
-            background-color: rgb(252, 11, 59);
-        }
-        .bar:nth-of-type(5n+2){
-            background-color: gold;
-        }
-        .bar:nth-of-type(5n+3){
-            background-color: forestgreen;
-        }
-        .bar:nth-of-type(5n+4){
-            background-color: paleturquoise;
-        }
-        .bar:nth-of-type(5n+5){
-            background-color: darkorchid;
+        .bar{
+            background:linear-gradient(30deg, white,black);
+            box-shadow: 2px 2px 5px 50px rgb(159, 144, 144);
         }
     </style>
 </head>
 <body>
     <div class="bar_container">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
 
 
     </div>
     
+    <script>
+        const container = document.querySelector('.bar_container')
+        
+            const bars =[]
+            let bar =''
+            for(let i =0; i<30; i++){
+                bar = document.createElement('div')
+                bar.classList.add('bar')
+                bars.push(bar)
+                container.appendChild(bar)
+            }
+            console.log(bars)
+
+
+            const keyframes = [
+                { transform : 'scaleY(0)', opacity:1},
+                { transform :'scaleY(1)',opacity:0}
+
+            ]
+
+            const options ={
+                duration:3000,
+                iterations:Infinity,
+                direction:'alternate',
+                fill:"both",
+                transformOrigin: '100% 100%'
+
+            }
+
+            bars.forEach((barEl,i)=>{
+                barEl.animate(keyframes,{...options,delay:i*200})
+            })
+    </script>
 </body>
 </html>
