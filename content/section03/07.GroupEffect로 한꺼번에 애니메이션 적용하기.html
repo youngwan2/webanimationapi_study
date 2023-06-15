@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: aquamarine;
+        }
+
+        .bar_container{
+            display: flex;
+            justify-content: left;
+            position: relative;
+         
+            
+        
+        }
+
+        .bar{
+            min-width: 20px;
+            height: 50vh;
+            border-radius: 50%;
+        }
+
+        .bar{
+            background:linear-gradient(30deg, white,black);
+        }
+    </style>
+</head>
+<body>
+    <div class="bar_container">
+
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.2/web-animations-next.min.js" integrity="sha512-7/fijTA9Hz7UI8uTqERZ89YumtyKAO4QJ1IvsHCqr7SX26X8FrGDyn2+oMt571I0VeceUiA8WZxCBOZorHxB6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const container = document.querySelector('.bar_container')
+        
+            const bars =[]
+            let bar =''
+            for(let i =0; i<200; i++){
+                bar = document.createElement('div')
+                bar.classList.add('bar')
+                bars.push(bar)
+                container.appendChild(bar)
+            }
+            // console.log(bars)
+
+
+            const keyframes = [
+                { transform : 'scaleY(0)'},
+                { transform :'scaleY(1)'}
+
+            ]
+
+            const options ={
+                duration:3000,
+                easing:'ease-in-out',
+                iterations:Infinity,
+                direction:'alternate',
+                fill:"both",
+            }
+
+            const effects =[]
+            bars.forEach((barEl,i)=>{
+                const newOptions ={...options, duration:i*200}
+                const effect = new KeyframeEffect(bar, keyframes, newOptions)
+                effects.push(effect)
+            })
+            
+            console.log(effects.length)
+
+            const groupEffect = new GroupEffect(effects);
+            console.log(groupEffect)
+
+            const animation = document.timeline.play(groupEffect)
+            console.log(animation)
+    </script>
+</body>
+</html>
