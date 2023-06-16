@@ -54,40 +54,38 @@
             animation.play()
 
 
+            //    const animation = box.animate(keyframes,options)
+        buttons.forEach((button)=>{
+           button.addEventListener('click',(e)=>{
+            const value= e.target.dataset.function
 
+            player(value)
+           })
+        })
 
-               // const animation = box.animate(keyframes,options)
-        // buttons.forEach((button)=>{
-        //    button.addEventListener('click',(e)=>{
-        //     const value= e.target.dataset.function
+        const player =(value)=>{
+            console.log(value)
 
-        //     player(value)
-        //    })
-        // })
-
-        // const player =(value)=>{
-        //     console.log(value)
-
-        //     switch(value){
-        //         case 'play':
-        //             animation.play()
-        //             state.innerHTML= animation.playState
-        //             break
-        //         case 'pause':
-        //             animation.pause()
-        //             state.innerHTML= animation.playState
-        //             break
-        //         case 'twice':
-        //             // playbackRate : 애니메이션 속도 조절
-        //             console.log(animation.playbackRate)
-        //             if(animation.playbackRate == 100){
-        //                 animation.playbackRate = 1
-        //             } else {
-        //                 animation.playbackRate = 100
-        //             }
-        //             state.innerHTML= animation.playState
-        //     }
-        // }
+            switch(value){
+                case 'play':
+                    animation.play()
+                    state.innerHTML= animation.playState
+                    break
+                case 'pause':
+                    animation.pause()
+                    state.innerHTML= animation.playState
+                    break
+                case 'twice':
+                    // playbackRate : 애니메이션 속도 조절
+                    console.log(animation.playbackRate)
+                    if(animation.playbackRate == 100){
+                        animation.playbackRate = 1
+                    } else {
+                        animation.playbackRate = 100
+                    }
+                    state.innerHTML= animation.playState
+            }
+        }
 
 
 
