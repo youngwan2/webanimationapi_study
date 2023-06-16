@@ -22,7 +22,10 @@
             min-width: 20px;
             height: 50vh;
             border-radius: 50%;
+            transform-origin: bottom;
+            will-change: transform;
         }
+
 
         .bar{
             background:linear-gradient(30deg, white,black);
@@ -65,18 +68,16 @@
 
             const effects =[]
             bars.forEach((barEl,i)=>{
-                const newOptions ={...options, duration:i*200}
-                const effect = new KeyframeEffect(bar, keyframes, newOptions)
+                const newOptions ={...options, delay:i*200}
+                const effect = new KeyframeEffect(barEl, keyframes, newOptions)
                 effects.push(effect)
             })
-            
-            console.log(effects.length)
 
             const groupEffect = new GroupEffect(effects);
             console.log(groupEffect)
 
             const animation = document.timeline.play(groupEffect)
-            console.log(animation)
-    </script>
+
+</script>
 </body>
 </html>
