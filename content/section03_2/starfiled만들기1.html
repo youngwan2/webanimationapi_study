@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        body{
-            overflow: hidden;
-            background-color: black;
-        }
+      body {
+        overflow: hidden;
+        background-color: black;
+      }
 
-        .star {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            font-size: 0;
-            border-radius: 50%;
-            background: white;
-        }
+      .star {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        font-size: 0;
+        border-radius: 50%;
+        background: rgb(255, 255, 255);
+       
+      }
+
+ 
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="starfiled"></div>
 
-    <div class="starfiled">
-    </div>
-    
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.2/web-animations-next.min.js"></script>
     <script type="module">
-        import Star from './star.js'
+      import Star from "./js/Star1.js";
+      const starFIled = document.querySelector(".starfiled");
+      const count = 300;
+      const star = new Star();
 
-        console.log(Star)
-
+      const stars = [];
+      let x, y, z;
+      let dynamicZ = window.innerHeight;
+      for (let i = 0; i < count; i++) {
+        x = Math.random() * window.innerWidth;
+        y = Math.random() * window.innerHeight;
+        z = (Math.random() * dynamicZ)/window.innerHeight; // 원근감 표현에 사용
+        new Star(i, x, y,z).appendStarElToDom();
+      }
     </script>
-</body>
+  </body>
 </html>
