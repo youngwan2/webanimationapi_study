@@ -1,0 +1,16 @@
+$main_color : red;
+
+@mixin commonColor($color: gray){
+    color:gold;
+}
+
+
+
+p{
+    a{
+        @include commonColor()
+    }
+    li{
+        @include commonColor()
+    }
+}

@@ -14,16 +14,37 @@
         width: 100%;
         height: 100vh;
         background-repeat: no-repeat;
+        perspective: 600px;
+        transform-style: preserve-3d;
       }
 
       .star {
         perspective: 600px;
         position: absolute;
+        background-color: black;
         width: 20px;
-        height: 20px;
-        font-size: 15px;
+        height: 1px;
+        font-size: 0;
         color:gold;
         border-radius: 50%;
+      }
+
+      .star:nth-of-type(5n+1){
+        background-color: royalblue;
+      }
+      .star:nth-of-type(5n+2){
+        background-color: forestgreen;
+      }
+      .star:nth-of-type(5n+3){
+        background-color: skyblue;
+        color:white;
+      }
+      .star:nth-of-type(5n+4){
+        background-color: teal;
+      }
+      .star:nth-of-type(5n+5){
+        background-color: midnightblue;
+        color:white;
       }
     </style>
   </head>
@@ -34,7 +55,7 @@
     <script type="module">
       import Star from "./js/Star2.js";
       const starFIled = document.querySelector(".starfiled");
-      const count = 100;
+      const count = 500;
 
       let keyframes, options;
       let x, y, z;
@@ -48,7 +69,9 @@
       function set3DPoint(x, y, z) {
 
         /* 스케일 생성 브라우저 높이에서 브라우저 높이에 랜덤한 z 값을 더한 결과를 나눈다. */
-        const scale = dynamicZ / (dynamicZ + z);
+        // 이렇게 되면 z 값이 작아질수록 scale 은 커지고, z 값이 커질수록 scale 은 작아진다.
+        // 즉, z 가 0에 가까울수록 scale은 커지고, z 가 무한대에 가까울수록 scale 은 반비레한다.
+        const scale = dynamicZ / (z+dynamicZ);
         // console.log(((Math.random() * dynamicZ) / dynamicZ) * 10);
         /* 동적인 스케일 값에 따라 x와 y 축 위치가 달라지도록 설정 */
         /* 그리고 화면의 중간에서 스케일에 따른 값 표현을 위해 위치를 이동 */
@@ -73,22 +96,25 @@
 
         /* 키 프레임 설정 */
         keyframes = [
+        {
+            transform: `translate(${pointTo[0]}px, ${pointTo[1]}px)
+             scale(${pointTo[2]})
+             rotateY(100deg)
+            `,
+          },
           {
             transform: `
              translate( ${pointForm[0]}px, ${pointForm[1]}px)
+             rotateY(120deg)
              scale(${pointForm[2]})
             `,
           },
-          {
-            transform: `translate(${pointTo[0]}px, ${pointTo[1]}px)
-             scale(${pointTo[2]})
-            `,
-          },
+
         ];
         /* 옵션 설정 */
         options = {
           // 스케일이 클수록 지속시간을 짧게, 작을수록 지속시간 길게
-          duration: 1000 / pointForm[2],
+          duration: 1500 / pointForm[2],
           easing: "linear",
           fill: "both",
           iterations: Infinity,
